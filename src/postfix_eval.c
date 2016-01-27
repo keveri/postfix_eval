@@ -16,7 +16,7 @@ static void ensure_alloc(char *str) {
 
 /* Read one line from input stream. */
 static char * read(FILE *input) {
-    uint32_t buff_size = 1024;
+    uint32_t buff_size = 4096;
     char *line_buff    = calloc(buff_size, sizeof(char));
     ensure_alloc(line_buff);
 
