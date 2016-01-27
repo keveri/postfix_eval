@@ -3,12 +3,12 @@
 #include <stdint.h>
 #include <string.h>
 
-struct stack {
+struct _stack {
     int32_t        *data;
     uint32_t       size;
     const uint32_t limit;
 };
-typedef struct stack stack;
+typedef struct _stack stack;
 
 /* Exit with failure msg if memory allocation failed. */
 static void ensure_data_alloc(int32_t *d) {

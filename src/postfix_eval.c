@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "stack.c"
+#include "stack.h"
 
 /* Exit with failure msg if memory allocation failed. */
 static void ensure_alloc(char *str) {
