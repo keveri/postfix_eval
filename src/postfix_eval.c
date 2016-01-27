@@ -50,7 +50,7 @@ static int32_t apply(stack *s, const char op) {
     }
 }
 
-/* Evaluate the statement. */
+/* Parse and apply operations from statement. */
 static int32_t eval(const char *stmnt) {
     stack *s       = init_stack(5);
     int32_t limit  = strlen(stmnt) - 1;
@@ -59,7 +59,11 @@ static int32_t eval(const char *stmnt) {
     char op;
     int32_t x,y;
 
-    /* parse and apply operations */
+    /* sscanf options:
+          %d : integer  (x, y), try to match 1 or 2 integers.
+          %c : operator (op)
+          %n : number of read characters (n)
+    */
     while (offset < limit) {
       if (sscanf(stmnt + offset, " %d %d %c%n", &x, &y, &op, &n) == 3) {
           push(s, x);
