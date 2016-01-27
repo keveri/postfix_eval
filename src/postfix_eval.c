@@ -82,7 +82,7 @@ int main() {
     char *statement = read(input);
     int32_t result  = eval(statement);
 
-    printf("Result: %d\n", result);
+    printf("%d\n", result);
 
     free(statement);
     return 0;
