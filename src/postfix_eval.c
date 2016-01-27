@@ -5,12 +5,16 @@
 
 #include "stack.h"
 
+static void exit_with_error(char *msg) {
+    fprintf(stderr, "%s\n", msg);
+    exit(1);
+}
+
 /* Exit with failure msg if memory allocation failed. */
 static void ensure_alloc(char *str) {
     if (str == NULL) {
         free(str);
-        perror("Allocation failure!");
-        exit(1);
+        exit_with_error("Allocation failure!");
     }
 }
 
@@ -64,8 +68,7 @@ static int32_t eval(const char *stmnt) {
           push(s, x);
       }
       else {
-          perror("Parse error!");
-          exit(1);
+          exit_with_error("Parse error!");
       }
       push(s, apply(s, op));
       offset += n;

@@ -10,12 +10,16 @@ struct _stack {
 };
 typedef struct _stack stack;
 
+static void exit_with_error(char *msg) {
+    fprintf(stderr, "%s\n", msg);
+    exit(1);
+}
+
 /* Exit with failure msg if memory allocation failed. */
 static void ensure_data_alloc(int32_t *d) {
     if (d == NULL) {
         free(d);
-        perror("Allocation failure!");
-        exit(1);
+        exit_with_error("Allocation failure!");
     }
 }
 
@@ -23,8 +27,7 @@ static void ensure_data_alloc(int32_t *d) {
 static void ensure_stack_alloc(stack *s) {
     if (s == NULL) {
         free(s);
-        perror("Allocation failure!");
-        exit(1);
+        exit_with_error("Allocation failure!");
     }
 }
 
@@ -53,23 +56,17 @@ void free_stack(stack *s) {
 /* Push a value into the stack. */
 void push(stack *s, const int32_t x) {
     if (s->size >= s->limit) {
-        perror("Stack full!");
-        exit(1);
+        exit_with_error("Stack full!");
     }
-    else {
-        s->data[s->size++] = x;
-    }
+    s->data[s->size++] = x;
 }
 
 /* Pop a value from the stack. */
 int32_t pop(stack *s) {
     if (s->size == 0) {
-        perror("Stack empty!");
-        exit(1);
+        exit_with_error("Stack empty!");
     }
-    else {
-        int32_t x = s->data[s->size - 1];
-        s->size--;
-        return x;
-    }
+    int32_t x = s->data[s->size - 1];
+    s->size--;
+    return x;
 }
