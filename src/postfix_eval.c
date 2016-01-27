@@ -20,6 +20,7 @@ static void ensure_alloc(char *str) {
 
 /* Read one line from input stream. */
 static char * read(FILE *input) {
+    /* Note: buffer is not dynamic */
     uint32_t buff_size = 4096;
     char *line_buff    = calloc(buff_size, sizeof(char));
     ensure_alloc(line_buff);
