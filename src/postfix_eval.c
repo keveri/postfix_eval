@@ -50,10 +50,10 @@ static int32_t apply(stack *s, const char op) {
     }
 }
 
-/* Parse and apply operations from statement. */
-static int32_t eval(const char *stmnt) {
+/* Parse and apply operations from the expression. */
+static int32_t eval(const char *expr) {
     stack *s       = init_stack(5);
-    int32_t limit  = strlen(stmnt) - 1;
+    int32_t limit  = strlen(expr) - 1;
     int32_t offset = 0;
     int32_t n      = 0;
     char op;
@@ -65,11 +65,11 @@ static int32_t eval(const char *stmnt) {
           %n : number of read characters (n)
     */
     while (offset < limit) {
-      if (sscanf(stmnt + offset, " %d %d %c%n", &x, &y, &op, &n) == 3) {
+      if (sscanf(expr + offset, " %d %d %c%n", &x, &y, &op, &n) == 3) {
           push(s, x);
           push(s, y);
       }
-      else if (sscanf(stmnt + offset, " %d %c%n", &x, &op, &n) == 2) {
+      else if (sscanf(expr + offset, " %d %c%n", &x, &op, &n) == 2) {
           push(s, x);
       }
       else {
@@ -87,11 +87,11 @@ static int32_t eval(const char *stmnt) {
 
 int main() {
     FILE *input     = stdin;
-    char *statement = read(input);
-    int32_t result  = eval(statement);
+    char *expression = read(input);
+    int32_t result  = eval(expression);
 
     printf("%d\n", result);
 
-    free(statement);
+    free(expression);
     return 0;
 }
